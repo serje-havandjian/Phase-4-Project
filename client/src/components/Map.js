@@ -2,9 +2,9 @@ import React from "react";
 
 function Map(){
     
-    // states = ?
+    // // states = ?
 
-    renderState = states.map
+    // renderState = states.map
 
     return(
         <h1>Map</h1>
