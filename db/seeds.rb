@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+State.destroy_all
+User.destroy_all
+Destination.destroy_all
+Review.destroy_all
+
 alabama = State.create(name: "Alabama")
 alaska = State.create(name: "Alaska")
 arizona = State.create(name: "Arizona")
@@ -42,7 +47,7 @@ north_carolina = State.create(name: "North Carolina")
 north_dakota = State.create(name: "North Dakota")
 ohio = State.create(name: "Ohio")
 oklahoma = State.create(name: "Oklahoma")
-oregon = State.create (name: "Oregon")
+oregon = State.create(name: "Oregon")
 pennsylvania = State.create(name: "Pennsylvania")
 rhode_island = State.create(name: "Rhode Island")
 south_carolina = State.create(name: "South Carolina")
@@ -52,13 +57,21 @@ texas = State.create(name: "Texas")
 utah = State.create(name: "Utah")
 vermont = State.create(name: "Vermont")
 virginia = State.create(name: "Virginia")
-washington = State.create (name: "Washington")
+washington = State.create(name: "Washington")
 west_virginia = State.create(name: "West Virginia")
 wisconsin = State.create(name: "Wisconsin")
 wyoming = State.create(name: "Wyoming")
 
 
-barbara = Tourist.create(name: "Barbara")
-yosemite = Destination.create(name: "Yosemite", review: "I like dis", rating: 5, state_id: california.id, tourist_id: barbara.id)
+barbara = User.create(username: "Barbara")
+beverly = User.create(username: "Beverly")
 
 
+yosemite = Destination.create(location: "Yosemite", state_id: california.id, user_id: barbara.id)
+lake_tahoe = Destination.create(location: "Lake Tahoe", state_id: california.id, user_id: beverly.id)
+
+review1 = Review.create(review: "I like dis", rating: 5, destination_id: yosemite.id, user_id: barbara.id)
+review2 = Review.create(review: "I don't like dis", rating: 1, destination_id: yosemite.id, user_id:barbara.id)
+
+
+puts "Done Seeding!"

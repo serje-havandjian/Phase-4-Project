@@ -1,2 +1,0 @@
-class TouristsController < ApplicationController
-end

@@ -1,3 +1,3 @@
 class DestinationSerializer < ActiveModel::Serializer
-  attributes :id, :name, :review, :rating, :state_id, :tourist_id
+  attributes :id, :location, :state_id, :user_id
 end
