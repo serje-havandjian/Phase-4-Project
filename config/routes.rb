@@ -4,7 +4,16 @@ Rails.application.routes.draw do
   resources :destinations
   resources :states
   resources :users
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+
+  # Route for login after signup
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+
+  # Route for signing up/creating new user
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
 end

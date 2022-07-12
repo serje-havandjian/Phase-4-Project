@@ -1,26 +1,42 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Map from "./Map";
+import MyProfile from "./MyProfile";
 
-function NavBar() {
-//     const [ active, setActive ] = useState("");
-
-//     function handleClick(e) {
-//         setActive(e.target.value);
-//     }
-
+function NavBar({ user, setUser }) {
+    function handleLogoutClick() {
+      fetch("/logout", { method: "DELETE" }).then((r) => {
+        if (r.ok) {
+          setUser(null);
+        }
+      });
+    }
+  
     return (
-         <nav id="navBar">
-            <NavLink to="/" exact>
-                <button>Login/HomePage</button>
+      <header>
+        <div>
+          <NavLink to="/">Home</NavLink>
+        </div>
+        <div>
+          {user ? (
+            <> 
+            <NavLink to ="/map">
+              <Map />
             </NavLink>
-            <NavLink to="/myprofile">
-                <button>My Profile</button>
+            <NavLink to ="/myprofile">
+              <MyProfile />
             </NavLink>
-            <NavLink to="/map">
-                <button>Map of All States</button>
-            </NavLink>
-        </nav>
-    )
-}
+            <button onClick={handleLogoutClick}>Logout</button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/signup">Signup</NavLink>
+              <NavLink to="/login">Login</NavLink>
+            </>
+          )}
+        </div>
+      </header>
+    );
+  }
 
 export default NavBar;
