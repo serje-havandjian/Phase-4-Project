@@ -1,12 +1,12 @@
 import React from "react";
 
-function Map(){
+function Map() {
     
     // // states = ?
 
     // renderState = states.map
 
-    return(
+    return (
         <h1>Map</h1>
     )
 }

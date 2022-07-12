@@ -1,8 +1,8 @@
 import React from "react";
 
-function MyProfile(){
+function MyProfile() {
     
-    return(
+    return (
         <h1>My Profile</h1>
     )
 }

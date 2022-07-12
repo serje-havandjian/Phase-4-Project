@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import Login from "./Login"
+import Login from "./Login";
 import MyProfile from "./MyProfile";
 import NavBar from "./NavBar";
 import Map from "./Map";
 
 function App() {
-  return (
 
+  return (
     <> 
       <NavBar />
         <Switch>
