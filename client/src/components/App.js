@@ -29,7 +29,7 @@ function App() {
                             <Home user={user}/>
                         </Route>
                         <Route exact path ="/map">
-                            <Map />
+                            <Map user={user}/>
                         </Route>
                         <Route exact path ="/myprofile">
                             <MyProfile />
