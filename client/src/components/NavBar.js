@@ -15,23 +15,25 @@ function NavBar({ user, setUser }) {
     return (
       <header>
         <div>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">
+              <button>Home</button>
+            </NavLink>
         </div>
         <div>
           {user ? (
             <> 
             <NavLink to ="/map">
-              <Map />
+              <button>Map</button>
             </NavLink>
             <NavLink to ="/myprofile">
-              <MyProfile />
+              <button> My Profile </button>
             </NavLink>
             <button onClick={handleLogoutClick}>Logout</button>
             </>
           ) : (
             <>
-              <NavLink to="/signup">Signup</NavLink>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/signup"> <button> Signup </button></NavLink>
+              <NavLink to="/login"><button> Login </button></NavLink>
             </>
           )}
         </div>
