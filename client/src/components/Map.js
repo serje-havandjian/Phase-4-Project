@@ -80,7 +80,6 @@ function Map({ user }) {
             )
         })
     }
-    console.log(reviewId, "reviewId after")
 
     const renderStates = states.map((state) => {
         return <button key={state.id} value={state.id} onClick={displayColonyData}>

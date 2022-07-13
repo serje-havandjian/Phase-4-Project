@@ -103,6 +103,8 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
           .then(result => setDestinationReviews(result))
 
           e.target.reset();
+          setRatingToEdit("");
+          setReviewToEdit("");
     }
 
     return (
@@ -111,20 +113,18 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
                 <form onSubmit={handleFormSubmit}>
                     <label>Add a new destination:</label><br></br>
                     <input id="destinationForm" onChange={newDestination} type="text" placeholder="Whisper to me your destination..."></input>
-                    {/* <input type="hidden" value={stateId}></input> */}
                     <button class="submitButton" type="submit">submit</button>
                 </form>
                 <form onSubmit={handleReviewSubmit}>
                     <label>Add a review:</label><br></br>
                     <input id="reviewForm" onChange={handleNewReview} type="text" placeholder="Whisper to me your review..."></input>
-                    {/* <input type="hidden" value={destinationId}></input> */}
                     <input id="rating" onChange={handleNewRating} type="integer" placeholder="Whisper to me your rating..."></input>
                     <button class="submitButton" type="submit">submit</button>
                 </form>
                 <form onSubmit={handleReviewEdit}>
                     <label>Edit your review:</label>
-                    <input value={reviewToEdit} onChange={changeReview} type="text"></input>
-                    <input value={ratingToEdit} onChange={changeRating} type="integer"></input>
+                    <input value={reviewToEdit} onChange={changeReview} type="text" placeholder="Whisper to me your edit..."></input>
+                    <input value={ratingToEdit} onChange={changeRating} type="integer" placeholder="Whisper to me your edit..."></input>
                     <button type="submit">submit</button>
                 </form>
             </div>
