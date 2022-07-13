@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   # Route for signing up/creating new user
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
+
 end

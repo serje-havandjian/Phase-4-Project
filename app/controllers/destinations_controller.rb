@@ -15,6 +15,11 @@ class DestinationsController < ApplicationController
         render json: destination
     end
 
+    def summary
+        destination = Destination.find(params[:id])
+        render json: destination, serializer: ReviewWithUsernameSerializer
+    end
+
     private
 
     def destination_params

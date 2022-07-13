@@ -5,6 +5,8 @@ function Map() {
     const [ states, setStates ] = useState([]);
     const [ stateId, setStateId ] = useState();
     const [ stateDestinations, setStateDestinations ] = useState([]);
+    const [ destinationId, setDestinationId ] = useState();
+    const [ destinationReviews, setDestinationReviews ] = useState([]);
    
     useEffect(()=>{
         fetch("/states")
@@ -14,11 +16,15 @@ function Map() {
         );
     },[]);
 
-    function displayColonyData(e){
+    function displayColonyData(e) {
         setStateId(e.target.value);   
     }
 
-    useEffect(()=>{
+    function handleDestinationId(e) {
+        setDestinationId(e.target.value);
+    }
+
+    useEffect(() => {
         fetch(`/states/${stateId}`)
         .then(result => result.json())
         .then(result => setStateDestinations(result));
@@ -29,12 +35,26 @@ function Map() {
 
     if (stateDestinations.destinations !== undefined) {
         renderStateDestinations = stateDestinations.destinations.map((destination) => {
-            return <div>{destination.location}</div>;
+            return <button onClick={handleDestinationId} value={destination.id}>{destination.location}</button>
+        })
+    } 
+
+    useEffect(()=>{
+        fetch(`/destinations/${destinationId}`)
+        .then(result => result.json())
+        .then(result => setDestinationReviews(result));
+    },[destinationId]); 
+
+    let renderDestinationReviews = null; 
+
+    if (destinationReviews.reviews !== undefined) {
+        renderDestinationReviews = destinationReviews.reviews.map((review) => {
+            return <div>{review.review}</div>
         })
     }
 
     const renderStates = states.map((state) => {
-        return <button value={state.id} onClick={displayColonyData}>
+        return <button key={state.id} value={state.id} onClick={displayColonyData}>
             {state.name}
             </button>
     })
@@ -44,9 +64,9 @@ function Map() {
         <h1>Map</h1>
         <h2>{renderStates}</h2>
         <h3>{renderStateDestinations}</h3>
+        <h4>{renderDestinationReviews}</h4>
         </>
     )
-    
 }
 
 export default Map
