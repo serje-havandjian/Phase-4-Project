@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Form({ stateId, user, destinationId, stateDestinations, setStateDestinations }) {
+function Form({ stateId, user, destinationId, stateDestinations, setStateDestinations, setDestinationReviews, reviewToEdit, ratingToEdit, setReviewToEdit, setRatingToEdit, reviewId }) {
     const [ newDestName, setNewDestName ] = useState("");
     const [ newReview, setNewReview ] = useState("");
     const [ newRating, setNewRating ] = useState();
@@ -26,7 +26,9 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
             body: JSON.stringify(newDestObj)
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(() => fetch(`/states/${stateId}`)
+        .then(result => result.json())
+        .then(result => setStateDestinations(result)))
 
         e.target.reset();
     }
@@ -59,9 +61,48 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
             body: JSON.stringify(newReviewObj)
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(() => fetch(`/destinations/${destinationId}`))
+        .then(result => result.json())
+        .then(result => setDestinationReviews(result))
 
         e.target.reset();
+    }
+
+    function changeReview(e) {
+        let newReview = e.target.value;
+        setReviewToEdit(newReview);
+    }
+
+    function changeRating(e) {
+        let newRating = e.target.value;
+        setRatingToEdit(newRating);
+    }
+
+    console.log(reviewId, "formId")
+
+    function handleReviewEdit(e) {
+        e.preventDefault();
+        const reviewObj = {
+            review: reviewToEdit,
+            rating: ratingToEdit,
+            destination_id: destinationId,
+            user_id: user.id
+        }
+
+        fetch(`/reviews/${reviewId}`, {
+            method: "PATCH", 
+            headers: {
+              "Content-Type": "application/json",
+              "Accepts": "application/json",
+            },
+            body: JSON.stringify(reviewObj)
+          })
+          .then((resp) => resp.json())
+          .then(() => fetch(`/destinations/${destinationId}`))
+          .then(result => result.json())
+          .then(result => setDestinationReviews(result))
+
+          e.target.reset();
     }
 
     return (
@@ -79,6 +120,12 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
                     {/* <input type="hidden" value={destinationId}></input> */}
                     <input id="rating" onChange={handleNewRating} type="integer" placeholder="Whisper to me your rating..."></input>
                     <button class="submitButton" type="submit">submit</button>
+                </form>
+                <form onSubmit={handleReviewEdit}>
+                    <label>Edit your review:</label>
+                    <input value={reviewToEdit} onChange={changeReview} type="text"></input>
+                    <input value={ratingToEdit} onChange={changeRating} type="integer"></input>
+                    <button type="submit">submit</button>
                 </form>
             </div>
         </>

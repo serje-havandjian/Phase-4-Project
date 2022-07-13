@@ -8,8 +8,11 @@ function Map({ user }) {
     const [ stateDestinations, setStateDestinations ] = useState([]);
     const [ destinationId, setDestinationId ] = useState();
     const [ destinationReviews, setDestinationReviews ] = useState([]);
+    const [ reviewId, setReviewId ] = useState();
+    const [ reviewToEdit, setReviewToEdit ] = useState("");
+    const [ ratingToEdit, setRatingToEdit ] = useState();
    
-    useEffect(()=>{
+    useEffect(() => {
         fetch("/states")
         .then(result => result.json())
         .then(result => 
@@ -31,7 +34,6 @@ function Map({ user }) {
         .then(result => setStateDestinations(result));
     },[stateId]); 
 
-  
     let renderStateDestinations = null;
 
     if (stateDestinations.destinations !== undefined) {
@@ -40,19 +42,45 @@ function Map({ user }) {
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`/destinations/${destinationId}`)
         .then(result => result.json())
         .then(result => setDestinationReviews(result));
     },[destinationId]); 
 
+    function handleDeleteReview(e) {
+
+        fetch(`/reviews/${e.target.value}`, {
+            method: "DELETE"
+        })
+        .then(() => fetch(`/destinations/${destinationId}`)
+        .then(result => result.json())
+        .then(result => setDestinationReviews(result)))
+
+    } 
+
+    function sendReviewToEdit(e) {
+        setReviewToEdit(e.target.value);
+        setRatingToEdit(e.target.name);
+    }
+
     let renderDestinationReviews = null; 
 
     if (destinationReviews.reviews !== undefined) {
         renderDestinationReviews = destinationReviews.reviews.map((review) => {
-            return <div>{review.review}</div>
+            return (
+                <>
+                    <div>review: {review.review} | rating: {review.rating}</div>
+                    <button value={review.review} name={review.rating} onClick={(e) => {
+                        setReviewId(review.id);
+                        sendReviewToEdit(e)
+                        }}>Edit</button>
+                    <button value={review.id} onClick={handleDeleteReview}>Delete</button>
+                </>
+            )
         })
     }
+    console.log(reviewId, "reviewId after")
 
     const renderStates = states.map((state) => {
         return <button key={state.id} value={state.id} onClick={displayColonyData}>
@@ -67,11 +95,9 @@ function Map({ user }) {
             <div>{renderStateDestinations}</div>
             <br></br>
             <div>{renderDestinationReviews}</div>
-            <Form stateId={stateId} user={user} destinationId={destinationId} stateDestinations={stateDestinations} setStateDestinations={setStateDestinations}/>
+            <Form reviewId={reviewId} reviewToEdit={reviewToEdit} ratingToEdit={ratingToEdit} setReviewToEdit={setReviewToEdit} setRatingToEdit={setRatingToEdit} stateId={stateId} user={user} destinationId={destinationId} stateDestinations={stateDestinations} setStateDestinations={setStateDestinations} setDestinationReviews={setDestinationReviews}/>
         </>
     )
 }
-
-// const [ destinationReviews, setDestinationReviews ] = useState([]);
 
 export default Map;
