@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-
-
+    
     def show
         return render json: {error: "not authorized"}, status: :unauthorized unless session.include? :user_id
         user = User.find(session[:user_id])
@@ -15,6 +14,11 @@ class UsersController < ApplicationController
         else
             render json: {error:user.errors.full_messages}, status: :unprocessable_entity
         end
+    end
+
+    def index
+        users = User.all
+        render json: users
     end
 
     private

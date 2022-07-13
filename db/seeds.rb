@@ -62,13 +62,14 @@ west_virginia = State.create(name: "West Virginia")
 wisconsin = State.create(name: "Wisconsin")
 wyoming = State.create(name: "Wyoming")
 
-
-barbara = User.create(username: "Barbara")
-beverly = User.create(username: "Beverly")
-
+barbara = User.create(username: "Barbara", password: "barb123", password_confirmation: "barb123")
+beverly = User.create(username: "Beverly", password: "bev123", password_confirmation: "bev123")
+mike = User.create(username: "Mike", password: "mike123", password_confirmation: "mike123")
 
 yosemite = Destination.create(location: "Yosemite", state_id: california.id, user_id: barbara.id)
 lake_tahoe = Destination.create(location: "Lake Tahoe", state_id: california.id, user_id: beverly.id)
+vegas = Destination.create(location: "Las Vegas", state_id: nevada.id, user_id: mike.id)
+phoenix = Destination.create(location: "Phoenix", state_id: arizona.id, user_id: barbara.id)
 
 review1 = Review.create(review: "I like dis", rating: 5, destination_id: yosemite.id, user_id: barbara.id)
 review2 = Review.create(review: "I don't like dis", rating: 1, destination_id: yosemite.id, user_id:barbara.id)

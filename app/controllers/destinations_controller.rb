@@ -10,4 +10,15 @@ class DestinationsController < ApplicationController
         render json: destination
     end
 
+    def create
+        destination = Destination.create(destination_params)
+        render json: destination
+    end
+
+    private
+
+    def destination_params
+        params.permit(:location, :user_id, :state_id)
+    end
+
 end
