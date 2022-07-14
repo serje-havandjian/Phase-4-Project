@@ -2,22 +2,17 @@ class DestinationsController < ApplicationController
 
     def index
         destinations = Destination.all
-        render json: destinations
+        render json: destinations, include: "*.*"
     end
 
     def show
         destination = Destination.find(params[:id])
-        render json: destination
+        render json: destination, include: "*.*"
     end
 
     def create
         destination = Destination.create(destination_params)
         render json: destination
-    end
-
-    def summary
-        destination = Destination.find(params[:id])
-        render json: destination, serializer: ReviewWithUsernameSerializer
     end
 
     private

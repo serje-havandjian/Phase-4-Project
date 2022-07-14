@@ -1,17 +1,17 @@
 class ReviewsController < ApplicationController
 
     def show
-        review = Review.find_by(destination_id: params[:destination_id])
+        review = Review.find_by!(destination_id: params[:destination_id])
         render json: review
     end
 
     def index
         reviews = Review.all
-        render json: reviews
+        render json: reviews, status: :ok
     end
 
     def create
-        review = Review.create(review_params)
+        review = Review.create!(review_params)
         render json: review, status: :created
     end
 
@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
 
     def update
         review = find_review
-        review.update(review_params)
+        review.update!(review_params)
         render json: review
     end
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Form({ stateId, user, destinationId, stateDestinations, setStateDestinations, setDestinationReviews, reviewToEdit, ratingToEdit, setReviewToEdit, setRatingToEdit, reviewId }) {
+function Form({ displayEditForm, setDisplayEditForm, displayReviewForm, setDisplayReviewForm, displayDestForm, setDisplayDestForm, stateId, user, destinationId, stateDestinations, setStateDestinations, setDestinationReviews, reviewToEdit, ratingToEdit, setReviewToEdit, setRatingToEdit, reviewId }) {
     const [ newDestName, setNewDestName ] = useState("");
     const [ newReview, setNewReview ] = useState("");
     const [ newRating, setNewRating ] = useState();
@@ -31,6 +31,8 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
         .then(result => setStateDestinations(result)))
 
         e.target.reset();
+        setDisplayReviewForm(false);
+        setDestinationReviews([]);
     }
 
     function handleNewReview(e) {
@@ -110,23 +112,23 @@ function Form({ stateId, user, destinationId, stateDestinations, setStateDestina
     return (
         <>
             <div class="form">
-                <form onSubmit={handleFormSubmit}>
+                {displayDestForm ? <form onSubmit={handleFormSubmit}>
                     <label>Add a new destination:</label><br></br>
                     <input id="destinationForm" onChange={newDestination} type="text" placeholder="Whisper to me your destination..."></input>
                     <button class="submitButton" type="submit">submit</button>
-                </form>
-                <form onSubmit={handleReviewSubmit}>
+                </form> : null}
+                {displayReviewForm ? <form onSubmit={handleReviewSubmit}>
                     <label>Add a review:</label><br></br>
                     <input id="reviewForm" onChange={handleNewReview} type="text" placeholder="Whisper to me your review..."></input>
                     <input id="rating" onChange={handleNewRating} type="integer" placeholder="Whisper to me your rating..."></input>
                     <button class="submitButton" type="submit">submit</button>
-                </form>
-                <form onSubmit={handleReviewEdit}>
+                </form> : null}
+                {displayEditForm ? <form onSubmit={handleReviewEdit}>
                     <label>Edit your review:</label>
                     <input value={reviewToEdit} onChange={changeReview} type="text" placeholder="Whisper to me your edit..."></input>
                     <input value={ratingToEdit} onChange={changeRating} type="integer" placeholder="Whisper to me your edit..."></input>
                     <button type="submit">submit</button>
-                </form>
+                </form> : null}
             </div>
         </>
     )

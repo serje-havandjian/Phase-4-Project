@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
     
     def show
-        return render json: {error: "not authorized"}, status: :unauthorized unless session.include? :user_id
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         user = User.find(session[:user_id])
-        render json: user
+        render json: user, status: :ok
     end
 
     def create
@@ -12,13 +12,13 @@ class UsersController < ApplicationController
         if user.valid?
             render json: user, status: :created
         else
-            render json: {error:user.errors.full_messages}, status: :unprocessable_entity
+            render json: { error: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
     def index
         users = User.all
-        render json: users
+        render json: users, status: :ok
     end
 
     private

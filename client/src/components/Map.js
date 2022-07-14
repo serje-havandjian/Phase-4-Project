@@ -11,6 +11,9 @@ function Map({ user }) {
     const [ reviewId, setReviewId ] = useState();
     const [ reviewToEdit, setReviewToEdit ] = useState("");
     const [ ratingToEdit, setRatingToEdit ] = useState();
+    const [ displayDestForm, setDisplayDestForm ] = useState(false);
+    const [ displayReviewForm, setDisplayReviewForm ] = useState(false);
+    const [ displayEditForm, setDisplayEditForm ] = useState(false);
    
     useEffect(() => {
         fetch("/states")
@@ -22,10 +25,15 @@ function Map({ user }) {
 
     function displayColonyData(e) {
         setStateId(e.target.value);   
+        setDisplayDestForm(true);
+        setDestinationReviews([])
+        setDisplayEditForm(false);
     }
 
     function handleDestinationId(e) {
         setDestinationId(e.target.value);
+        setDisplayReviewForm(true);
+        setDisplayEditForm(false);
     }
 
     useEffect(() => {
@@ -70,10 +78,11 @@ function Map({ user }) {
         renderDestinationReviews = destinationReviews.reviews.map((review) => {
             return (
                 <>
-                    <div>review: {review.review} | rating: {review.rating}</div>
+                    <div>review: {review.review} | rating: {review.rating} | user: {review.user?.username}</div>
                     <button value={review.review} name={review.rating} onClick={(e) => {
                         setReviewId(review.id);
-                        sendReviewToEdit(e)
+                        sendReviewToEdit(e);
+                        setDisplayEditForm(true);
                         }}>Edit</button>
                     <button value={review.id} onClick={handleDeleteReview}>Delete</button>
                 </>
@@ -94,7 +103,7 @@ function Map({ user }) {
             <div>{renderStateDestinations}</div>
             <br></br>
             <div>{renderDestinationReviews}</div>
-            <Form reviewId={reviewId} reviewToEdit={reviewToEdit} ratingToEdit={ratingToEdit} setReviewToEdit={setReviewToEdit} setRatingToEdit={setRatingToEdit} stateId={stateId} user={user} destinationId={destinationId} stateDestinations={stateDestinations} setStateDestinations={setStateDestinations} setDestinationReviews={setDestinationReviews}/>
+            <Form displayEditForm={displayEditForm} setDisplayEditForm={setDisplayEditForm} displayReviewForm={displayReviewForm} setDisplayReviewForm={setDisplayReviewForm} displayDestForm={displayDestForm} setDisplayDestForm={setDisplayDestForm} reviewId={reviewId} reviewToEdit={reviewToEdit} ratingToEdit={ratingToEdit} setReviewToEdit={setReviewToEdit} setRatingToEdit={setRatingToEdit} stateId={stateId} user={user} destinationId={destinationId} stateDestinations={stateDestinations} setStateDestinations={setStateDestinations} setDestinationReviews={setDestinationReviews}/>
         </>
     )
 }
