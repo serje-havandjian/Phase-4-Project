@@ -65,6 +65,7 @@ function Map({ user }) {
         .then(result => result.json())
         .then(result => setDestinationReviews(result)))
 
+        setDisplayEditForm(false);
     } 
 
     function sendReviewToEdit(e) {
