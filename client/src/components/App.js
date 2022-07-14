@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "./Login";
-import MyProfile from "./MyProfile";
 import NavBar from "./NavBar";
 import Map from "./Map";
-import Home from "./Home";
+import Home from './Home';
 import SignUp from "./SignUp";
 
 
@@ -26,13 +25,10 @@ function App() {
                 {user ? (
                     <Switch>
                         <Route exact path="/">
-                            <Home user={user}/>
+                            <Home setUser={setUser} user={user}/>
                         </Route>
                         <Route exact path ="/map">
                             <Map user={user}/>
-                        </Route>
-                        <Route exact path ="/myprofile">
-                            <MyProfile />
                         </Route>
                     </Switch>
                 ) : (
@@ -44,7 +40,7 @@ function App() {
                         <Login setUser={setUser} />
                     </Route>
                     <Route exact path="/">
-                        <Home />
+                        <Home setUser={setUser} />
                     </Route>
                 </Switch>
                 )}

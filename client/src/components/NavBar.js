@@ -1,13 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Map from "./Map";
-import MyProfile from "./MyProfile";
+import { Button } from 'semantic-ui-react';
 
 function NavBar({ user, setUser }) {
+
+  const history = useHistory()
+
     function handleLogoutClick() {
       fetch("/logout", { method: "DELETE" }).then((r) => {
         if (r.ok) {
           setUser(null);
+          history.push("/login")
         }
       });
     }
@@ -15,26 +19,22 @@ function NavBar({ user, setUser }) {
     return (
       <header>
         <div>
-          <NavLink to="/">
-              <button>Home</button>
-            </NavLink>
-        </div>
-        <div>
           {user ? (
             <> 
+            <NavLink to="/">
+              <Button color="pink">Home</Button>
+            </NavLink>
             <NavLink to ="/map">
-              <button>Map</button>
+              <Button color="blue">Map</Button>
             </NavLink>
-            <NavLink to ="/myprofile">
-              <button> My Profile </button>
-            </NavLink>
-            <button onClick={handleLogoutClick}>Logout</button>
+              <Button color="purple" onClick={handleLogoutClick}>Bon voyage {user.username}!</Button>
             </>
           ) : (
-            <>
-              <NavLink to="/signup"> <button> Signup </button></NavLink>
-              <NavLink to="/login"><button> Login </button></NavLink>
-            </>
+            null
+            // <>
+            //   <NavLink to="/signup"> <Button color="twitter">Signup</Button></NavLink>
+            //   <NavLink to="/login"><Button color="twitter">Login</Button></NavLink>
+            // </>
           )}
         </div>
       </header>

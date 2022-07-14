@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 
 function Login({ setUser }) {
     const [ username, setUsername ] = useState("");
@@ -20,29 +21,53 @@ function Login({ setUser }) {
     }
 
     return (
-        <div>
-          <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              autoComplete="off"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Login</button>
-          </form>
-        </div>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUq6t2-8dvl2Gc3YBDLC669_hzvoL3RYgOw&usqp=CAU"/> Log-in to your account
+            </Header>
+            <Form size='large' onSubmit={handleSubmit}>
+              <Segment stacked>
+                <Form.Input fluid icon='user' iconPosition="left" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username"/>
+                <Form.Input
+                  fluid
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button type="submit" color='teal' fluid size="large">
+                  Login
+                </Button>
+              </Segment>              
+            </Form>
+            <Message>
+              New to us? <a href="/signup">Sign up here.</a>
+            </Message>
+          </Grid.Column>
+        </Grid>
     );
 }
 
 export default Login
+
+{/* <h1>Login</h1>
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                autoComplete="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button type="submit">Login</button> */}
