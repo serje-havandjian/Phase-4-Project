@@ -25,9 +25,9 @@ function NavBar({ user, setUser }) {
               <Button color="pink">Home</Button>
             </NavLink>
             <NavLink to ="/map">
-              <Button color="blue">Map</Button>
+              <Button color="blue">Mediocre Places</Button>
             </NavLink>
-              <Button color="purple" onClick={handleLogoutClick}>Bon voyage {user.username}!</Button>
+              <Button color="purple" onClick={handleLogoutClick}>Bon Voyage {user.username}!</Button>
             </>
           ) : (
             null

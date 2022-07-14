@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import InputForm from './InputForm';
-import { Image, List, Button, Card, Grid, Icon } from 'semantic-ui-react';
+import { Image, List, Button, Card, Grid, Icon, Header } from 'semantic-ui-react';
 
 function Map({ user }) {
 
@@ -48,7 +48,7 @@ function Map({ user }) {
 
     if (stateDestinations.destinations !== undefined) {
         renderStateDestinations = stateDestinations.destinations.map((destination) => {
-            return <Button color="teal" size="big" style={{ height: '5vh' }} onClick={handleDestinationId} key={destination.id} name={destination.id}>{destination.location}</Button>
+            return <Button color="gray" size="big" style={{ height: '5vh' }} onClick={handleDestinationId} key={destination.id} name={destination.id}>{destination.location}</Button>
         })
     }
 
@@ -82,20 +82,20 @@ function Map({ user }) {
         renderDestinationReviews = destinationReviews.reviews.map((review) => {
             return (
                 <>
-                    <Card style={{ backgroundColor:"yellow" }}textAlign="center">
+                    <Card style={{ backgroundColor: "teal" }}textAlign="center">
                         <Card.Content>
-                            <Card.Header style={{ fontSize:'20px'}}>{review.destination.location}</Card.Header>
-                            <Card.Description style={{ fontSize:'20px' }}>{review.user?.username} says "{review.review}"</Card.Description>
+                            <Card.Header style={{ fontSize:'20px', color:"white" }}>{review.destination.location}</Card.Header>
+                            <Card.Description style={{ fontSize:'20px', color:"white" }}>{review.user?.username} says "{review.review}"</Card.Description>
                             <br></br>
-                            <Card.Description>Rating: {review.rating}</Card.Description>
+                            <Card.Description style={{ fontSize:'18px', color:"white" }}>Rating: {review.rating}</Card.Description>
                             <br></br>
                             <br></br>
                             <Button value={review.review} name={review.rating} onClick={(e) => {
                             setReviewId(review.id);
                             sendReviewToEdit(e);
                             setDisplayEditForm(true);
-                            }}> Edit </Button>
-                            <Button value={review.id} onClick={handleDeleteReview}> Delete </Button>
+                            }} inverted color="green"> Edit </Button>
+                            <Button inverted value={review.id} onClick={handleDeleteReview} color="red"> Delete </Button>
                         </Card.Content>
                     </Card>
                 </>
@@ -107,7 +107,7 @@ function Map({ user }) {
         return (
             <>
                 <List.Item>
-                    <List.Header key={state.id} title={state.id} onClick={displayColonyData}>{state.name}</List.Header>
+                    <List.Header style={{ textAlign: "center" }} key={state.id} title={state.id} onClick={displayColonyData}>{state.name}</List.Header>
                 </List.Item>
             </>
         )
@@ -115,9 +115,9 @@ function Map({ user }) {
     
     return (
         <>
-            <h1>Map</h1>
+            <Header style={{ textAlign: "center", fontSize: "50px" }}>Mediocre Places</Header>
             <Grid>
-                <Grid.Column width={2}>
+                <Grid.Column width={3}>
                     <List animated verticalAlign="middle">{renderStates}</List>
                 </Grid.Column>
                 <Grid.Column width={12}>
