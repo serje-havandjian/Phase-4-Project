@@ -1,5 +1,4 @@
 import SignUp from "./SignUp";
-import Login from "./Login";
 
 function Home({ user, setUser }) {
     if (user) {
@@ -9,5 +8,5 @@ function Home({ user, setUser }) {
     }
   }
   
-  export default Home;
+export default Home;
   

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import InputForm from './InputForm';
-import { Image, List, Button, Card, Grid, Icon, Header } from 'semantic-ui-react';
+import { List, Button, Card, Grid, Header } from 'semantic-ui-react';
 
 function Map({ user }) {
 
@@ -19,17 +19,14 @@ function Map({ user }) {
     useEffect(() => {
         fetch("/states")
         .then(result => result.json())
-        .then(result => 
-            setStates(result)
-        );
+        .then(result => setStates(result));
     },[]);
 
     function displayColonyData(e) {
         setStateId(e.target.title);   
         setDisplayDestForm(true);
-        setDestinationReviews([])
+        setDestinationReviews([]);
         setDisplayEditForm(false);
-        console.log(e, "this is e")
     }
 
     function handleDestinationId(e) {
@@ -49,8 +46,8 @@ function Map({ user }) {
     if (stateDestinations.destinations !== undefined) {
         renderStateDestinations = stateDestinations.destinations.map((destination) => {
             return <Button color="gray" size="big" style={{ height: '5vh' }} onClick={handleDestinationId} key={destination.id} name={destination.id}>{destination.location}</Button>
-        })
-    }
+        });
+    };
 
     useEffect(() => {
         fetch(`/destinations/${destinationId}`)
@@ -65,7 +62,7 @@ function Map({ user }) {
         })
         .then(() => fetch(`/destinations/${destinationId}`)
         .then(result => result.json())
-        .then(result => setDestinationReviews(result)))
+        .then(result => setDestinationReviews(result)));
 
         setDisplayEditForm(false);
     } 
@@ -73,7 +70,6 @@ function Map({ user }) {
     function sendReviewToEdit(e) {
         setReviewToEdit(e.target.value);
         setRatingToEdit(e.target.name);
-        console.log(e.target.name, "target name");
     }
 
     let renderDestinationReviews = null; 
@@ -99,8 +95,8 @@ function Map({ user }) {
                         </Card.Content>
                     </Card>
                 </>
-            )
-        })
+            );
+        });
     }
 
     const renderStates = states.map((state) => {
@@ -110,8 +106,8 @@ function Map({ user }) {
                     <List.Header style={{ textAlign: "center" }} key={state.id} title={state.id} onClick={displayColonyData}>{state.name}</List.Header>
                 </List.Item>
             </>
-        )
-    })
+        );
+    });
     
     return (
         <>
@@ -128,7 +124,7 @@ function Map({ user }) {
                 </Grid.Column>
             </Grid>
         </>
-    )
+    );
 }
 
 export default Map;

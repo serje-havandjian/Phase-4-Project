@@ -17,7 +17,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             location: newDestName,
             state_id: stateId,
             user_id: user.id
-        }
+        };
 
         fetch("/destinations", {
             method: "POST",
@@ -29,14 +29,12 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
         .then(resp => resp.json())
         .then(() => fetch(`/states/${stateId}`)
         .then(result => result.json())
-        .then(result => setStateDestinations(result)))
+        .then(result => setStateDestinations(result)));
 
         e.target.reset();
         setDisplayReviewForm(false);
         setDestinationReviews([]);
     }
-
-    console.log(stateDestinations, "statedest")
 
     function handleNewReview(e) {
         e.preventDefault();
@@ -56,7 +54,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             rating: newRating,
             destination_id: destinationId,
             user_id: user.id
-        }
+        };
 
         fetch("/reviews", {
             method: "POST",
@@ -68,7 +66,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
         .then(resp => resp.json())
         .then(() => fetch(`/destinations/${destinationId}`))
         .then(result => result.json())
-        .then(result => setDestinationReviews(result))
+        .then(result => setDestinationReviews(result));
 
         e.target.reset();
     }
@@ -85,12 +83,12 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
 
     function handleReviewEdit(e) {
         e.preventDefault();
-        const reviewObj = {
+        let reviewObj = {
             review: reviewToEdit,
             rating: ratingToEdit,
             destination_id: destinationId,
             user_id: user.id
-        }
+        };
 
         fetch(`/reviews/${reviewId}`, {
             method: "PATCH", 
@@ -103,7 +101,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
           .then((resp) => resp.json())
           .then(() => fetch(`/destinations/${destinationId}`))
           .then(result => result.json())
-          .then(result => setDestinationReviews(result))
+          .then(result => setDestinationReviews(result));
 
           e.target.reset();
           setRatingToEdit("");
@@ -132,7 +130,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
                 </Form> : null}
             </div>
         </>
-    )
+    );
 }
 
 export default InputForm;

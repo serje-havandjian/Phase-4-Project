@@ -21,13 +21,13 @@ function NavBar({ user, setUser }) {
         <div>
           {user ? (
             <> 
-            <NavLink to="/">
-              <Button color="pink">Home</Button>
-            </NavLink>
-            <NavLink to ="/map">
-              <Button color="blue">Mediocre Places</Button>
-            </NavLink>
-              <Button color="purple" onClick={handleLogoutClick}>Bon Voyage {user.username}!</Button>
+              <NavLink to="/">
+                <Button color="pink">Home</Button>
+              </NavLink>
+              <NavLink to ="/map">
+                <Button color="blue">Mediocre Places</Button>
+              </NavLink>
+                <Button color="purple" onClick={handleLogoutClick}>Bon Voyage {user.username}!</Button>
             </>
           ) : (
             null

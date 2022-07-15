@@ -51,7 +51,7 @@ function Login({ setUser }) {
     );
 }
 
-export default Login
+export default Login;
 
 {/* <h1>Login</h1>
               <label htmlFor="username">Username</label>
