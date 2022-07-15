@@ -111,7 +111,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
     return (
         <>
             <div class="form">
-                {displayDestForm ? <Form style={{ backgroundColor: "teal" }} onSubmit={handleFormSubmit}>
+                {displayDestForm ? <Form onSubmit={handleFormSubmit}>
                     <label>Add a new destination:</label><br></br>
                     <Form.Input id="destinationForm" onChange={newDestination} type="text" placeholder="Whisper to me your destination..."></Form.Input>
                     <Button class="submitButton" type="submit">submit</Button>
