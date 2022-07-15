@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
-  background-image: "";
+  
+  background-image: url(https://live.staticflickr.com/65535/50088115923_b2aa4b8f33_b.jpg);
 }
 
 code {
