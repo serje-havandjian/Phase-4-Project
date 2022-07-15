@@ -17,7 +17,7 @@ function Map({ user }) {
     const [ displayEditForm, setDisplayEditForm ] = useState(false);
    
     useEffect(() => {
-        fetch("/states")
+        fetch("https://better-state-traveler.herokuapp.com/states")
         .then(result => result.json())
         .then(result => setStates(result));
     },[]);
@@ -36,7 +36,7 @@ function Map({ user }) {
     }
 
     useEffect(() => {
-        fetch(`/states/${stateId}`)
+        fetch(`https://better-state-traveler.herokuapp.com/states/${stateId}`)
         .then(result => result.json())
         .then(result => setStateDestinations(result));
     },[stateId]); 
@@ -50,17 +50,17 @@ function Map({ user }) {
     };
 
     useEffect(() => {
-        fetch(`/destinations/${destinationId}`)
+        fetch(`https://better-state-traveler.herokuapp.com/destinations/${destinationId}`)
         .then(result => result.json())
         .then(result => setDestinationReviews(result));
     },[destinationId]); 
 
     function handleDeleteReview(e) {
 
-        fetch(`/reviews/${e.target.value}`, {
+        fetch(`https://better-state-traveler.herokuapp.com/reviews/${e.target.value}`, {
             method: "DELETE"
         })
-        .then(() => fetch(`/destinations/${destinationId}`)
+        .then(() => fetch(`https://better-state-traveler.herokuapp.com/destinations/${destinationId}`)
         .then(result => result.json())
         .then(result => setDestinationReviews(result)));
 

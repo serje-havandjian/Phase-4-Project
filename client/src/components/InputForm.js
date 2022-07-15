@@ -19,7 +19,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             user_id: user.id
         };
 
-        fetch("/destinations", {
+        fetch("https://better-state-traveler.herokuapp.com/destinations", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             body: JSON.stringify(newDestObj)
         })
         .then(resp => resp.json())
-        .then(() => fetch(`/states/${stateId}`)
+        .then(() => fetch(`https://better-state-traveler.herokuapp.com/states/${stateId}`)
         .then(result => result.json())
         .then(result => setStateDestinations(result)));
 
@@ -56,7 +56,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             user_id: user.id
         };
 
-        fetch("/reviews", {
+        fetch("https://better-state-traveler.herokuapp.com/reviews", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             body: JSON.stringify(newReviewObj)
         })
         .then(resp => resp.json())
-        .then(() => fetch(`/destinations/${destinationId}`))
+        .then(() => fetch(`https://better-state-traveler.herokuapp.com/destinations/${destinationId}`))
         .then(result => result.json())
         .then(result => setDestinationReviews(result));
 
@@ -90,7 +90,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             user_id: user.id
         };
 
-        fetch(`/reviews/${reviewId}`, {
+        fetch(`https://better-state-traveler.herokuapp.com/reviews/${reviewId}`, {
             method: "PATCH", 
             headers: {
               "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             body: JSON.stringify(reviewObj)
           })
           .then((resp) => resp.json())
-          .then(() => fetch(`/destinations/${destinationId}`))
+          .then(() => fetch(`https://better-state-traveler.herokuapp.com/destinations/${destinationId}`))
           .then(result => result.json())
           .then(result => setDestinationReviews(result));
 
