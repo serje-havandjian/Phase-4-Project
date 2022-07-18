@@ -113,19 +113,19 @@ function InputForm({ displayEditForm, setDisplayEditForm, displayReviewForm, set
             <div class="form">
                 {displayDestForm ? <Form onSubmit={handleFormSubmit}>
                     <label>Add a new destination:</label><br></br>
-                    <Form.Input id="destinationForm" onChange={newDestination} type="text" placeholder="Whisper to me your destination..."></Form.Input>
+                    <Form.Input id="destinationForm" onChange={newDestination} type="text" placeholder="Add your destination..."></Form.Input>
                     <Button class="submitButton" type="submit">submit</Button>
                 </Form> : null}
                 {displayReviewForm ? <Form onSubmit={handleReviewSubmit}>
                     <label>Add a review:</label><br></br>
-                    <TextArea id="reviewForm" onChange={handleNewReview} type="text" placeholder="Whisper to me your review..."></TextArea>
-                    <Form.Input id="rating" onChange={handleNewRating} type="integer" placeholder="Whisper to me your rating..."></Form.Input>
+                    <TextArea id="reviewForm" onChange={handleNewReview} type="text" placeholder="Add your review..."></TextArea>
+                    <Form.Input id="rating" onChange={handleNewRating} type="integer" placeholder="Add your rating..."></Form.Input>
                     <Button class="submitButton" type="submit">submit</Button>
                 </Form> : null}
                 {displayEditForm ? <Form onSubmit={handleReviewEdit}>
                     <label>Edit your review:</label>
-                    <TextArea value={reviewToEdit} onChange={changeReview} type="text" placeholder="Whisper to me your edit..."></TextArea>
-                    <Form.Input value={ratingToEdit} onChange={changeRating} type="integer" placeholder="Whisper to me your edit..."></Form.Input>
+                    <TextArea value={reviewToEdit} onChange={changeReview} type="text" placeholder="Edit review..."></TextArea>
+                    <Form.Input value={ratingToEdit} onChange={changeRating} type="integer" placeholder="Edit rating..."></Form.Input>
                     <Button type="submit">submit</Button>
                 </Form> : null}
             </div>

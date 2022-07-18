@@ -111,7 +111,7 @@ function Map({ user }) {
     
     return (
         <>
-            <Header style={{ textAlign: "center", fontSize: "50px" }}>Mediocre Places For Mediocre People</Header>
+            <Header style={{ textAlign: "center", fontSize: "50px" }}>Leave A Review From Your Travels!</Header>
             <Grid>
                 <Grid.Column width={3}>
                     <List animated verticalAlign="middle">{renderStates}</List>
